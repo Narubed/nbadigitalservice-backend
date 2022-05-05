@@ -12,7 +12,8 @@ const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const deleteImage = require("./routes/deleteImage");
 const transportsRoutes = require("./routes/transports");
-const representativeRoutes = require("./routes/representatives")
+const representativeRoutes = require("./routes/representatives");
+const newsRoutes = require("./routes/news");
 
 const { google } = require("googleapis");
 const CLIENT_ID = process.env.GOOGLE_DRIVE_CLIENT_ID;
@@ -43,51 +44,8 @@ app.use("/api/nbadigitalservice/auth", authRoutes);
 app.use("/api/nbadigitalservice/users", userRoutes);
 app.use("/api/nbadigitalservice/transports", transportsRoutes);
 app.use("/api/nbadigitalservice/representatives", representativeRoutes);
+app.use("/api/nbadigitalservice/news", newsRoutes)
 
 // const filePath = path.join(__dirname, 'NBA2.png')
-
-
-async function uploadFile(req, res) {
-    // const filePath = req.file.path;
-    const filePath = path.join(__dirname, 'NBA2.png')
-    let fileMetaData = {
-        // name: req.file.originalname,
-        parents: ["1_UNPHTT6Q9ZPrzWQMHmWTKES8KOreGb8"],
-    };
-    let media = {
-        body: fs.createReadStream(filePath),
-    };
-    try {
-        const response = await drive.files.create({
-            resource: fileMetaData,
-            media: media,
-        });
-        console.log(response.data)
-        generatePublicUrl(response.data.id);
-    } catch (error) {
-        console.log(error.massage);
-    }
-}
-async function generatePublicUrl(res) {
-    console.log(res);
-    try {
-        const fileId = res;
-        await drive.permissions.create({
-            fileId: fileId,
-            requestBody: {
-                role: "reader",
-                type: "anyone",
-            },
-        });
-        const result = await drive.files.get({
-            fileId: fileId,
-            fields: "webViewLink, webContentLink",
-        });
-        console.log(result.data);
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-// uploadFile()
 const port = process.env.PORT || 8080;
 app.listen(port, console.log(`Listening on port ${port}...`));
