@@ -45,7 +45,7 @@ app.use("/api/nbadigitalservice/users", userRoutes);
 app.use("/api/nbadigitalservice/transports", transportsRoutes);
 app.use("/api/nbadigitalservice/representatives", representativeRoutes);
 app.use("/api/nbadigitalservice/news", newsRoutes)
-
+console.log(process.env);
 // const filePath = path.join(__dirname, 'NBA2.png')
 const port = process.env.PORT || 8080;
 app.listen(port, console.log(`Listening on port ${port}...`));

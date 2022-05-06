@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
+require("dotenv").config();
 
 const newsSchema = new mongoose.Schema({
 	news_title: { type: String, required: true },
@@ -10,6 +11,7 @@ const newsSchema = new mongoose.Schema({
 	news_date: { type: String, required: true },
 });
 newsSchema.methods.generateAuthToken = function () {
+	console.log("process.env.JWTPRIVATEKEY", process.env.JWTPRIVATEKEY);
 	const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
 		expiresIn: "2h",
 	});

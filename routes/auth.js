@@ -2,9 +2,9 @@ const router = require("express").Router();
 const { User } = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
+require("dotenv").config();
 
 router.post("/", async (req, res) => {
-	console.log(req.body)
 	try {
 		const { error } = validate(req.body);
 		if (error)

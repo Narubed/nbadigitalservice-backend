@@ -41,7 +41,6 @@ exports.findAll = (req, res) => {
 
 exports.delete = (req, res) => {
     const id = req.params.id;
-    console.log(id);
     News.findByIdAndRemove(id, { useFindAndModify: false })
         .then(data => {
             if (!data) {
@@ -63,7 +62,6 @@ exports.delete = (req, res) => {
 const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, Date.now() + "-" + file.originalname);
-        console.log(Date.now());
     },
 });
 
@@ -78,10 +76,8 @@ exports.create = async (req, res) => {
             } else if (err) {
                 return res.send(err);
             }
-            console.log(req.body);
             uploadFileCreate(req, res);
         });
-
         async function uploadFileCreate(req, res) {
             const filePath = req.file.path;
             let fileMetaData = {
@@ -124,7 +120,7 @@ async function generatePublicUrl(res) {
             fileId: fileId,
             fields: "webViewLink, webContentLink",
         });
-        console.log(result.data);
+        // console.log(result.data);
     } catch (error) {
         console.log(error.message);
     }

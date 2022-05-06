@@ -42,7 +42,6 @@ exports.findAll = (req, res) => {
 const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, Date.now() + "-" + file.originalname);
-        console.log(Date.now());
     },
 });
 
@@ -97,7 +96,6 @@ async function uploadFile(req, res) {
     }
 }
 async function generatePublicUrl(res) {
-    console.log(res);
     try {
         const fileId = res;
         await drive.permissions.create({
@@ -111,7 +109,6 @@ async function generatePublicUrl(res) {
             fileId: fileId,
             fields: "webViewLink, webContentLink",
         });
-        console.log(result.data);
     } catch (error) {
         console.log(error.message);
     }
