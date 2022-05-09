@@ -14,6 +14,7 @@ const deleteImage = require("./routes/deleteImage");
 const transportsRoutes = require("./routes/transports");
 const representativeRoutes = require("./routes/representatives");
 const newsRoutes = require("./routes/news");
+const advertRoutes = require("./routes/advert");
 
 const { google } = require("googleapis");
 const CLIENT_ID = process.env.GOOGLE_DRIVE_CLIENT_ID;
@@ -45,7 +46,6 @@ app.use("/api/nbadigitalservice/users", userRoutes);
 app.use("/api/nbadigitalservice/transports", transportsRoutes);
 app.use("/api/nbadigitalservice/representatives", representativeRoutes);
 app.use("/api/nbadigitalservice/news", newsRoutes)
-console.log(process.env);
-// const filePath = path.join(__dirname, 'NBA2.png')
+app.use("/api/nbadigitalservice/advert", advertRoutes)
 const port = process.env.PORT || 8080;
 app.listen(port, console.log(`Listening on port ${port}...`));
