@@ -30,7 +30,10 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
     try {
         User.find()
+        // User.aggregate([{$lookup:{from:"transports",localField:"transport_name",foreignField:"transport_name",as:"เชื่อมต่อข้อมูล"}}])
             .then(async data => {
+                // const result = data.filter(value => value.firstName === "AOF");
+                // console.log(result)
                 res.send({ data, message: 'success' });
             })
             .catch(err => {
