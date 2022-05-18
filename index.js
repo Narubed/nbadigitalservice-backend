@@ -11,7 +11,6 @@ const connection = require("./config/db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const deleteImage = require("./routes/deleteImage");
-const transportsRoutes = require("./routes/transports");
 const representativeRoutes = require("./routes/representatives");
 const newsRoutes = require("./routes/news");
 const advertRoutes = require("./routes/advert");
@@ -44,7 +43,6 @@ app.use(cors());
 app.use("/api/nbadigitalservice/deleteImage", deleteImage);
 app.use("/api/nbadigitalservice/auth", authRoutes);
 app.use("/api/nbadigitalservice/users", userRoutes);
-app.use("/api/nbadigitalservice/transports", transportsRoutes);
 app.use("/api/nbadigitalservice/representatives", representativeRoutes);
 app.use("/api/nbadigitalservice/news", newsRoutes)
 app.use("/api/nbadigitalservice/advert", advertRoutes)
